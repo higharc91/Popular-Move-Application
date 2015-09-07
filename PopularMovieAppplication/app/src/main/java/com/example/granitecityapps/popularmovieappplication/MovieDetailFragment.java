@@ -10,6 +10,10 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * A placeholder fragment containing a simple view.
  */
@@ -33,12 +37,28 @@ public class MovieDetailFragment extends Fragment {
             TextView movieSynp = (TextView)fragment.findViewById(R.id.text_view_syn);
             ImageView posterImageView = (ImageView)fragment.findViewById(R.id.image_view_detail_poster);
             titleTextView.setText(MainActivityFragment.mSelectedMovieData.MovieTitle);
-            releaseDateTextView.setText(MainActivityFragment.mSelectedMovieData.ReleaseDate);
+            releaseDateTextView.setText(formatReleaseDate(MainActivityFragment.mSelectedMovieData.ReleaseDate));
             movieVotes.setText(MainActivityFragment.mSelectedMovieData.VoteAverage + "/10");
             movieSynp.setText(MainActivityFragment.mSelectedMovieData.PlotSyn);
             Picasso.with(getActivity()).load(MainActivityFragment.mSelectedMovieData.PicturePath).into(posterImageView);
         }
         return fragment;
+    }
+
+
+    private String formatReleaseDate(String date)
+    {
+        //This will take the date and format it to be more readable
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            //formating the date in a more readble way i.e. 05-22-15
+            Date dateFormat = formatter.parse(date);
+            return new SimpleDateFormat("MM-dd-yyyy").format(dateFormat);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
 

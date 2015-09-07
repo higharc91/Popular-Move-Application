@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <ImageView
+       android:layout_width="170dp"
+        android:layout_height="265dp"
+        android:id="@+id/gridview_movieposter_imageview"
+
+         />
+<!--
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#283593">
+        <TextView
+            android:layout_width="match_parent"
+            android:paddingLeft="16dp"
+            android:paddingTop="16dp"
+            android:textSize="16sp"
+            android:textColor="#FFFFFF"
+            android:layout_height="?android:attr/listPreferredItemHeight"
+            android:id="@+id/gridview_movietitle_textview"
+            android:text="this is a place holder"/>
+    </LinearLayout>
+-->
+</LinearLayout>

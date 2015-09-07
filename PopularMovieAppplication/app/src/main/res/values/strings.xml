@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Arcs Movie App</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_movie_detail">Details</string>
+    <string name="settings_title">Settings</string>
+
+    <!--Pref keys -->
+
+    <string name="pref_sort_key">sort_key</string>
+    <string name="pref_sort_default">popularity</string>
+
+    <string name="pref_popularity_key">popularity</string>
+    <string name="pref_popularity_display">Popularity</string>
+
+    <string name="pref_rating_key">rating</string>
+    <string name="pref_rating_display">Rating</string>
+
+
+</resources>

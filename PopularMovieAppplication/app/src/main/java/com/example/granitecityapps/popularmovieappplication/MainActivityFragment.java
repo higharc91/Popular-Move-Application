@@ -110,7 +110,7 @@ public class MainActivityFragment extends Fragment {
     public class FetchMoivePoster extends AsyncTask<String, Void, List<MoviePosterData>> {
 
         private final String LOG_TAG = FetchMoivePoster.class.getSimpleName();
-        private final String API_KEY = "dcadc1b0ce504424cc0ec3c4c81d203e";
+        private final String API_KEY = "INSERT KEY HERE";
         private final String BASE_URL = "http://api.themoviedb.org/3/discover/movie?";
         private final String POPULAR_PARAMETER = "popularity.desc";
         private final String RATING_PARAMETER = "vote_average.desc";

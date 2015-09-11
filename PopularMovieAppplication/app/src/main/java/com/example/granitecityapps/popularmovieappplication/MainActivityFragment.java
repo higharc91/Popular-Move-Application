@@ -31,16 +31,21 @@ import java.util.List;
 public class MainActivityFragment extends Fragment {
 
     View fragmentView;
+
+
+
     MoviePosterAdapter movieAdapter;
     public static MoviePosterData mSelectedMovieData;
-    private List<MoviePosterData> mMovieQueryResults = new ArrayList<MoviePosterData>();
+    private boolean mHasSavedContent = false;
+    private ArrayList<MoviePosterData> mMovieQueryResults = new ArrayList<MoviePosterData>();
     public MainActivityFragment() {
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        fetchMovieData();
+        if(!mHasSavedContent)
+            fetchMovieData();
     }
 
     private void fetchMovieData() {
@@ -57,13 +62,15 @@ public class MainActivityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        movieAdapter = new MoviePosterAdapter(getActivity(), mMovieQueryResults);
-
         fragmentView = inflater.inflate(R.layout.fragment_main, container, false);
+        if(savedInstanceState != null && savedInstanceState.containsKey(MOVIE_ADAPTER_KEY))
+        {
+            mHasSavedContent = true;
+            mMovieQueryResults = savedInstanceState.getParcelableArrayList(MOVIE_ADAPTER_KEY);
+        }
+        movieAdapter = new MoviePosterAdapter(getActivity(), mMovieQueryResults);
         GridView movieGridView = (GridView)fragmentView.findViewById(R.id.movie_poster_gridview);
         movieGridView.setAdapter(movieAdapter);
-
-
         //Wiring up the gridview to allow intent launching on detail
         movieGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -85,13 +92,25 @@ public class MainActivityFragment extends Fragment {
 
     }
 
+    static final String MOVIE_ADAPTER_KEY = "movieAdapter"; //key for the movie adapter
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        //here I will save the member variables
+        outState.putParcelableArrayList(MOVIE_ADAPTER_KEY, mMovieQueryResults);
+        super.onSaveInstanceState(outState);
+
+
+
+    }
+
 
 
 
     public class FetchMoivePoster extends AsyncTask<String, Void, List<MoviePosterData>> {
 
         private final String LOG_TAG = FetchMoivePoster.class.getSimpleName();
-        private final String API_KEY = "INSERT KEY HERE";
+        private final String API_KEY = "dcadc1b0ce504424cc0ec3c4c81d203e";
         private final String BASE_URL = "http://api.themoviedb.org/3/discover/movie?";
         private final String POPULAR_PARAMETER = "popularity.desc";
         private final String RATING_PARAMETER = "vote_average.desc";
